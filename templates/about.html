@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - SmartLabel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🏷️ SmartLabel</h1>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}" class="active">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="about-section">
+            <h2>About SmartLabel</h2>
+            <p>SmartLabel is an AI-powered web application that helps consumers make informed decisions about the food products they consume. By analyzing ingredient labels, we provide instant health ratings and recommendations.</p>
+
+            <h3>How It Works</h3>
+            <ol>
+                <li><strong>Image Upload:</strong> Users upload a photo of a food product's ingredient label</li>
+                <li><strong>OCR Processing:</strong> We use Tesseract OCR to extract text from the image</li>
+                <li><strong>Ingredient Analysis:</strong> Our system analyzes the extracted ingredients against a database of known unhealthy and processed ingredients</li>
+                <li><strong>Health Rating:</strong> Based on the analysis, we generate a health rating:
+                    <ul>
+                        <li><span class="badge badge-success">Healthy</span> - Contains minimal concerning ingredients</li>
+                        <li><span class="badge badge-warning">Moderate</span> - Contains some processed or concerning ingredients</li>
+                        <li><span class="badge badge-danger">Avoid</span> - Contains multiple unhealthy ingredients</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Technology Stack</h3>
+            <ul>
+                <li><strong>Flask:</strong> Python web framework for the backend</li>
+                <li><strong>Tesseract OCR:</strong> Open-source optical character recognition engine</li>
+                <li><strong>Pillow:</strong> Python Imaging Library for image processing</li>
+                <li><strong>HTML/CSS:</strong> Frontend user interface</li>
+            </ul>
+
+            <h3>Disclaimer</h3>
+            <p>This application is designed to provide general guidance on food ingredients. It should not replace professional medical or nutritional advice. The analysis is based on commonly recognized unhealthy ingredients and may not be comprehensive. Always consult with healthcare professionals for personalized dietary recommendations.</p>
+
+            <div class="cta-section">
+                <h3>Ready to start?</h3>
+                <a href="{{ url_for('index') }}" class="btn btn-primary">Analyze Your First Product</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 SmartLabel. AI-powered ingredient analysis for healthier choices.</p>
+        </div>
+    </footer>
+</body>
+</html>
