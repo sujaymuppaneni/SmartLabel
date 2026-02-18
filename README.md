@@ -67,6 +67,13 @@ Download and install from: https://github.com/UB-Mannheim/tesseract/wiki
    ```bash
    python app.py
    ```
+   
+   **For development with debug mode:**
+   ```bash
+   FLASK_DEBUG=true python app.py
+   ```
+   
+   **Note:** Debug mode is disabled by default for security. Only enable it during development.
 
 2. **Open your browser and navigate to:**
    ```
@@ -77,6 +84,19 @@ Download and install from: https://github.com/UB-Mannheim/tesseract/wiki
    - Click "Choose File" and select an image (JPG or PNG)
    - Click "Analyze Ingredients"
    - View the health rating and recommendations
+
+## Configuration
+
+The application supports the following environment variables:
+
+- **SECRET_KEY**: Secret key for Flask session management (randomly generated if not set)
+- **FLASK_DEBUG**: Set to `true` to enable debug mode (default: `false`)
+
+**For production deployment:**
+```bash
+export SECRET_KEY="your-strong-random-secret-key"
+python app.py
+```
 
 ## How It Works
 
