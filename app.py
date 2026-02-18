@@ -6,7 +6,7 @@ from PIL import Image
 import re
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key-here'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', os.urandom(24).hex())
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg'}
@@ -152,7 +152,7 @@ def upload_file():
         # Clean up - remove uploaded file
         try:
             os.remove(filepath)
-        except:
+        except (OSError, FileNotFoundError):
             pass
         
         # Render results
