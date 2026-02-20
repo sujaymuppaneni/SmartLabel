@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results - SmartLabel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🏷️ SmartLabel</h1>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="results-header">
+            <h2>Analysis Results</h2>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Analyze Another Image</a>
+        </div>
+
+        <div class="rating-card rating-{{ analysis.rating_class }}">
+            <div class="rating-badge">
+                {% if analysis.rating == 'Healthy' %}
+                    ✅
+                {% elif analysis.rating == 'Moderate' %}
+                    ⚠️
+                {% else %}
+                    ❌
+                {% endif %}
+            </div>
+            <h3>Health Rating: {{ analysis.rating }}</h3>
+            <p class="recommendation">{{ analysis.recommendation }}</p>
+        </div>
+
+        <div class="results-section">
+            <h3>Extracted Text</h3>
+            <div class="text-box">
+                {{ extracted_text }}
+            </div>
+        </div>
+
+        <div class="results-section">
+            <h3>Ingredient Analysis</h3>
+            
+            {% if analysis.unhealthy_found %}
+                <div class="ingredient-list ingredient-danger">
+                    <h4>⚠️ Unhealthy Ingredients Found ({{ analysis.unhealthy_count }})</h4>
+                    <ul>
+                        {% for ingredient in analysis.unhealthy_found %}
+                            <li>{{ ingredient }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            {% if analysis.moderate_found %}
+                <div class="ingredient-list ingredient-warning">
+                    <h4>⚡ Moderate Ingredients Found ({{ analysis.moderate_count }})</h4>
+                    <ul>
+                        {% for ingredient in analysis.moderate_found %}
+                            <li>{{ ingredient }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            {% if not analysis.unhealthy_found and not analysis.moderate_found %}
+                <div class="ingredient-list ingredient-success">
+                    <h4>✅ No Concerning Ingredients Detected</h4>
+                    <p>This product appears to have clean ingredients based on our database.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="info-box">
+            <h4>ℹ️ About This Analysis</h4>
+            <p>This analysis is based on commonly recognized unhealthy and processed ingredients. 
+            While our system identifies many problematic ingredients, it's not exhaustive. 
+            Always read labels carefully and consult with healthcare professionals for personalized dietary advice.</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 SmartLabel. AI-powered ingredient analysis for healthier choices.</p>
+        </div>
+    </footer>
+</body>
+</html>
